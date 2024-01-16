@@ -49,4 +49,21 @@ while True:
 
     # Obtenir une réponse basée sur l'entrée de l'utilisateur
     response = chatbot.get_response(user_input)
+
+    # Mettre à jour le contexte de la conversation
+    conversation_context = {
+        "subject": "Vols",
+        "questions": ["Quels sont les types de vols disponibles?", "Comment puis-je annuler ma réservation?"],
+        "answers": ["Nous proposons des vols réguliers et des vols charter vers diverses destinations.", "Pour annuler une réservation, veuillez nous contacter par téléphone ou par e-mail."]
+    }
+
+    # Traiter la réponse en fonction du contexte
+    if conversation_context["subject"] == "Vols":
+        if user_input in conversation_context["questions"]:
+            response = conversation_context["answers"][conversation_context["questions"].index(user_input)]
+        elif user_input == "Je veux réserver un vol":
+            conversation_context["subject"] = "Réservation de vol"
+            conversation_context["questions"] = ["Quelle est votre destination?", "Quelles sont vos dates de voyage?", "Combien de personnes voyagent avec vous?"]
+            response = "Quelle est votre destination?"
+
     print("Charlie:", response)
